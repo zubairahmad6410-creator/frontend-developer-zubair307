@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="docTitle">BSSE Developer Portfolio | ZUBAIR AHMAD</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        fuuast: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        },
+                        brand: {
+                            emerald: '#10b981',
+                            whatsapp: '#25D366',
+                            cyan: '#06b6d4',
+                            violet: '#8b5cf6',
+                            darkBg: '#080c14',
+                            cardBg: '#0f172a',
+                            panelBg: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080c14;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        .glow-whatsapp {
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
+        }
+        .glow-blue {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+
+    <header class="sticky top-0 z-40 glass-card border-b border-slate-800/80 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-emerald-400 flex items-center justify-center font-extrabold text-white shadow-lg glow-blue">
+                <span id="logoInitial">Z</span>
+            </div>
+            <div>
+                <a href="#hero" class="font-bold text-base sm:text-lg tracking-tight hover:text-blue-400 transition" id="navName">Zubair Ahmad</a>
+                <p class="text-[10px] text-blue-400 font-semibold tracking-wide flex items-center gap-1">
+                    <i class="fa-solid fa-graduation-cap"></i> <span id="navUniversity">FUUAST Islamabad (BSSE)</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-6 text-xs font-semibold tracking-wider uppercase text-slate-300">
+            <a href="#about" class="hover:text-blue-400 transition">About Me</a>
+            <a href="#services" class="hover:text-blue-400 transition">Business Services</a>
+            <a href="#projects" class="hover:text-blue-400 transition">Portfolio Projects</a>
+            <a href="#contact" class="hover:text-blue-400 transition">Contact & Hire</a>
+        </nav>
+
+        <div class="flex items-center space-x-2.5">
+            <!-- Edit Personal Info Modal Trigger -->
+            <button onclick="toggleConfigModal()" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-user-pen"></i>
+                <span class="hidden sm:inline">Edit My Info</span>
+            </button>
+
+            <!-- Direct WhatsApp Quick Chat Button -->
+            <a id="navWhatsappBtn" href="https://wa.me/923334618487?text=Hello!%20I%20want%20to%20build%20a%20website%20for%20my%20business." target="_blank" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/30 transition flex items-center gap-1.5">
+                <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
+                <span class="hidden sm:inline">WhatsApp</span>
+            </a>
+
+            <!-- Mobile Drawer Menu Trigger -->
+            <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-300 hover:text-white rounded-lg bg-slate-800">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div id="mobileNav" class="hidden fixed inset-0 bg-slate-950/95 z-50 flex flex-col items-center justify-center space-y-6 text-base font-semibold text-slate-200">
+        <button onclick="toggleMobileNav()" class="absolute top-5 right-5 text-2xl text-slate-400 hover:text-white">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="#hero" onclick="toggleMobileNav()" class="hover:text-blue-400">Home</a>
+        <a href="#about" onclick="toggleMobileNav()" class="hover:text-blue-400">About & FUUAST Details</a>
+        <a href="#services" onclick="toggleMobileNav()" class="hover:text-blue-400">Business Services</a>
+        <a href="#projects" onclick="toggleMobileNav()" class="hover:text-blue-400">Portfolio Projects</a>
+        <a href="#contact" onclick="toggleMobileNav()" class="hover:text-blue-400">Contact & Order Website</a>
+    </div>
+
+    <section id="hero" class="relative py-12 sm:py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
+        <div class="flex-1 space-y-6 text-center md:text-left">
+            
+            <!-- FUUAST Student Badge -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-950/90 border border-blue-600/50 text-blue-300 text-xs font-medium">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+                <i class="fa-solid fa-graduation-cap text-blue-400"></i>
+                <span id="heroBadgeUni">BSSE Student @ FUUAST Islamabad</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                Get a High-Quality <br class="hidden sm:inline">
+                <span id="heroName" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400">Business Website</span>
+            </h1>
+
+            <!-- Animated Typing Subtitle -->
+            <div class="text-lg sm:text-2xl font-mono text-slate-300 flex items-center justify-center md:justify-start gap-2">
+                <span>I Build</span>
+                <span id="typingText" class="text-emerald-400 font-bold border-r-2 border-emerald-400 pr-1">E-Commerce Stores</span>
+            </div>
+
+            <p id="heroBio" class="text-slate-400 text-xs sm:text-sm max-w-xl leading-relaxed">
+                Hi! I am a Junior Frontend Web Developer studying Software Engineering (BSSE) at Federal Urdu University of Arts, Sciences & Technology (FUUAST) Islamabad. I build fast, mobile-friendly, modern websites for businesses, shops, brands, and personal portfolios.
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
+                <a id="heroWhatsappCta" href="https://wa.me/923334618487?text=Hi!%20I%20need%20a%20website%20for%20my%20business." target="_blank" class="px-5 py-3 text-xs sm:text-sm font-bold rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white shadow-lg glow-whatsapp transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Order via WhatsApp</span>
+                </a>
+                
+                <a href="#contact" class="px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition flex items-center gap-2">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Send Email Message</span>
+                </a>
+            </div>
+
+            <!-- Social Media Icon Quick Bar -->
+            <div class="pt-4 flex items-center justify-center md:justify-start space-x-3">
+                <span class="text-xs text-slate-500 font-bold tracking-wider uppercase me-1">My Handles:</span>
+                
+                <a id="linkGithub" href="https://github.com" target="_blank" title="GitHub Profile" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 transition">
+                    <i class="fa-brands fa-github text-base"></i>
+                </a>
+                <a id="linkYoutube" href="https://youtube.com" target="_blank" title="YouTube Channel" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-red-500 hover:border-red-500/50 transition">
+                    <i class="fa-brands fa-youtube text-base"></i>
+                </a>
+                <a id="linkFacebook" href="https://facebook.com" target="_blank" title="Facebook Page" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-500 hover:border-blue-500/50 transition">
+                    <i class="fa-brands fa-facebook text-base"></i>
+                </a>
+                <a id="linkInstagram" href="https://instagram.com" target="_blank" title="Instagram Handle" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-500 hover:border-pink-500/50 transition">
+                    <i class="fa-brands fa-instagram text-base"></i>
+                </a>
+                <a id="linkTiktok" href="https://tiktok.com" target="_blank" title="TikTok Profile" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition">
+                    <i class="fa-brands fa-tiktok text-base"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Student Profile Card -->
+        <div class="w-full max-w-xs sm:max-w-sm">
+            <div class="glass-card p-6 rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden group">
+                <div class="absolute -top-12 -right-12 w-40 h-40 bg-blue-600/20 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition"></div>
+                
+                <div class="relative z-10 space-y-4 text-center">
+                    <div class="w-24 h-24 mx-auto rounded-full bg-slate-900 border-2 border-blue-500/60 p-1 flex items-center justify-center overflow-hidden shadow-inner">
+                        <img id="avatarImg" src="zubair2.jpg" alt="Developer Avatar" class="w-full h-full object-cover rounded-full">
+                    </div>
+
+                    <div>
+                        <h3 id="cardName" class="font-bold text-base sm:text-lg text-slate-100">Zubair Ahmad</h3>
+                        <p class="text-xs text-blue-400 font-mono">Frontend Developer & Designer</p>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800/80 space-y-2.5 text-xs text-left">
+                        <div class="flex items-center justify-between text-slate-400">
+                            <span><i class="fa-solid fa-graduation-cap text-blue-400 me-2"></i>University:</span>
+                            <span id="cardUniversity" class="text-slate-200 font-medium">FUUAST Islamabad</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-400">
+                            <span><i class="fa-solid fa-book-bookmark text-emerald-400 me-2"></i>Program:</span>
+                            <span class="text-slate-200 font-medium">BSSE (Software Eng.)</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-400">
+                            <span><i class="fa-solid fa-phone text-emerald-400 me-2"></i>Mobile / Call:</span>
+                            <span id="cardMobile" class="text-slate-200 font-mono font-medium">+92 3334618487</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-400">
+                            <span><i class="fa-brands fa-whatsapp text-emerald-400 me-2"></i>WhatsApp:</span>
+                            <span id="cardWhatsapp" class="text-slate-200 font-mono font-medium">+92 3334618487</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-400">
+                            <span><i class="fa-solid fa-location-dot text-rose-400 me-2"></i>City / Address:</span>
+                            <span id="cardAddress" class="text-slate-200 font-medium">Jampur / Dere Ghazi Khan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-14 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+        <div class="text-center space-y-2 mb-10">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400">About Me & Academic Status</h2>
+            <p class="text-xs sm:text-sm text-slate-400">Junior Frontend Web Developer offering budget-friendly website development for business clients.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            
+            <!-- Student Bio Card -->
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-200 text-base">FUUAST Islamabad Student</h3>
+                        <p class="text-xs text-blue-400">Federal Urdu University of Arts, Sciences & Technology</p>
+                    </div>
+                </div>
+
+                <p id="aboutDetailText" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    I am currently pursuing my Bachelor of Science in Software Engineering (BSSE) at FUUAST Islamabad. Alongside my studies, I work as a freelance frontend developer helping shop owners, business managers, and startups build professional online websites.
+                </p>
+
+                <div class="grid grid-cols-2 gap-3 text-xs pt-2">
+                    <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-800">
+                        <span class="text-slate-500 block">Responsive Design</span>
+                        <strong class="text-emerald-400">100% Mobile Ready</strong>
+                    </div>
+                    <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-800">
+                        <span class="text-slate-500 block">Fast Turnaround</span>
+                        <strong class="text-cyan-400">Quick Delivery</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Skills & Languages -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-code text-cyan-400"></i> My Technical Stack
+                </h3>
+                
+                <div class="flex flex-wrap gap-2.5">
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-orange-400 flex items-center gap-2">
+                        <i class="fa-brands fa-html5 text-base"></i> HTML5
+                    </span>
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-blue-400 flex items-center gap-2">
+                        <i class="fa-brands fa-css3-alt text-base"></i> CSS3
+                    </span>
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-amber-400 flex items-center gap-2">
+                        <i class="fa-brands fa-js text-base"></i> JavaScript (ES6+)
+                    </span>
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-cyan-400 flex items-center gap-2">
+                        <i class="fa-brands fa-react text-base"></i> React.js
+                    </span>
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-wind text-base"></i> Tailwind CSS
+                    </span>
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-purple-400 flex items-center gap-2">
+                        <i class="fa-brands fa-bootstrap text-base"></i> Bootstrap
+                    </span>
+                    <span class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300 flex items-center gap-2">
+                        <i class="fa-brands fa-github text-base"></i> Git & GitHub
+                    </span>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-blue-950/40 border border-blue-800/40 text-xs text-blue-300 space-y-1">
+                    <p class="font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i> Affordable Business Pricing
+                    </p>
+                    <p class="text-slate-400">As a student developer, I offer high quality websites at discounted student rates for local businesses in Islamabad, Rawalpindi, and online clients globally.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services" class="py-14 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+        <div class="text-center space-y-2 mb-10">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Web Development Services For Businesses</h2>
+            <p class="text-xs sm:text-sm text-slate-400">Choose the type of website you want me to create for your shop, brand, or company.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Service 1: Business Website -->
+            <div class="glass-card p-6 rounded-2xl border border-slate-800/80 hover:border-blue-500/50 transition space-y-4 flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Corporate & Shop Websites</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Professional multi-page websites for business offices, restaurants, doctors, agencies, and local shops.
+                    </p>
+                </div>
+                <a href="#contact" class="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                    Order Website <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- Service 2: E-Commerce Store -->
+            <div class="glass-card p-6 rounded-2xl border border-slate-800/80 hover:border-emerald-500/50 transition space-y-4 flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">E-Commerce Web Stores</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Online storefronts with product catalogs, shopping carts, and direct WhatsApp order placement.
+                    </p>
+                </div>
+                <a href="#contact" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+                    Order Store <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- Service 3: Landing Pages -->
+            <div class="glass-card p-6 rounded-2xl border border-slate-800/80 hover:border-cyan-500/50 transition space-y-4 flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Single-Page Landing Pages</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Fast, eye-catching single page layouts designed to sell a specific product, event, or service.
+                    </p>
+                </div>
+                <a href="#contact" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                    Order Landing Page <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- Service 4: Student & Developer Portfolios -->
+            <div class="glass-card p-6 rounded-2xl border border-slate-800/80 hover:border-purple-500/50 transition space-y-4 flex flex-col justify-between group">
+                <div class="space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Personal Portfolio Websites</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Custom personal portfolios for university students, engineers, freelancers, and doctors to get hired.
+                    </p>
+                </div>
+                <a href="#contact" class="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1">
+                    Order Portfolio <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects" class="py-14 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Sample Projects I Built</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Demonstrating frontend skills and layout capabilities.</p>
+            </div>
+
+            <!-- Project Filter Tabs -->
+            <div class="flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 text-xs">
+                <button onclick="filterProjects('all')" class="project-tab active px-3 py-1.5 rounded-lg font-semibold text-blue-400 bg-slate-800 transition">All</button>
+                <button onclick="filterProjects('business')" class="project-tab px-3 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-slate-200 transition">Business</button>
+                <button onclick="filterProjects('ecommerce')" class="project-tab px-3 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-slate-200 transition">E-Commerce</button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Project 1 -->
+            <div class="project-card ecommerce glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-emerald-500/40 transition flex flex-col">
+                <div class="h-44 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&auto=format&fit=crop&q=80" alt="E-Commerce Store" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-400 border border-emerald-800">E-Commerce Web Application</span>
+                        <h3 class="font-bold text-slate-200 text-base mt-2">Modern Clothing Online Store</h3>
+                        <p class="text-xs text-slate-400 mt-1">Full-featured mobile store layout with cart system and direct WhatsApp checkout.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+                        <button onclick="openPreviewModal('Modern Clothing Store', 'A complete e-commerce website interface designed for online clothing brands featuring dynamic product selection and WhatsApp ordering.', 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800')" class="text-emerald-400 hover:underline font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> Quick Preview
+                        </button>
+                        <a id="project1CodeLink" href="https://github.com" target="_blank" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-base"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card business glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-blue-500/40 transition flex flex-col">
+                <div class="h-44 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&auto=format&fit=crop&q=80" alt="Corporate Business" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-950 text-blue-400 border border-blue-800">Business Agency Website</span>
+                        <h3 class="font-bold text-slate-200 text-base mt-2">Corporate Office Web Portal</h3>
+                        <p class="text-xs text-slate-400 mt-1">Clean multi-section corporate website layout with service overview and inquiry forms.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+                        <button onclick="openPreviewModal('Corporate Office Web Portal', 'Professional corporate landing layout for businesses in Islamabad/Rawalpindi looking for an online presence.', 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800')" class="text-blue-400 hover:underline font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> Quick Preview
+                        </button>
+                        <a id="project2CodeLink" href="https://github.com" target="_blank" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-base"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card business glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-cyan-500/40 transition flex flex-col">
+                <div class="h-44 overflow-hidden bg-slate-900 relative">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80" alt="Restaurant Site" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-950 text-cyan-400 border border-cyan-800">Restaurant & Food Site</span>
+                        <h3 class="font-bold text-slate-200 text-base mt-2">Restaurant Menu & Ordering</h3>
+                        <p class="text-xs text-slate-400 mt-1">Interactive food menu display with instant WhatsApp table reservation.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+                        <button onclick="openPreviewModal('Restaurant Menu Site', 'Custom website for restaurants and cafes with online menu viewer and instant WhatsApp table booking.', 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800')" class="text-cyan-400 hover:underline font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> Quick Preview
+                        </button>
+                        <a id="project3CodeLink" href="https://github.com" target="_blank" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-base"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="py-14 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            
+            <!-- Personal Contact Details -->
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-blue-400 to-cyan-400">Order Your Website Today</h2>
+                    <p class="text-xs sm:text-sm text-slate-400">Contact me via WhatsApp or Email to discuss your website project requirements.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 space-y-4">
+                    
+                    <!-- WhatsApp Box -->
+                    <a id="contactWhatsappCard" href="https://wa.me/923334618487?text=Hello!%20I%20want%20to%20order%20a%20website." target="_blank" class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-600/40 hover:border-emerald-500 transition flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl glow-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-emerald-400 font-semibold block">Instant WhatsApp Chat</span>
+                            <span id="contactWhatsappText" class="text-sm font-bold text-slate-100 font-mono">+92 3334618487</span>
+                        </div>
+                    </a>
+
+                    <!-- Direct Call / Mobile Box -->
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Mobile Call Number</span>
+                            <span id="contactMobileText" class="text-sm font-bold text-slate-200 font-mono">+92 3334618487</span>
+                        </div>
+                    </div>
+
+                    <!-- Email Box -->
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Email Address</span>
+                            <a id="contactEmailLink" href="mailto:student@fuuast.edu.pk" class="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition">zubairahmad6410@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Location Box -->
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Location / Address</span>
+                            <span id="contactLocationText" class="text-sm font-semibold text-slate-200">Islamabad / Rawalpindi</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Social Handles Grid -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Connect On Social Media</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                        <a id="socGithub" href="https://github.com" target="_blank" class="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-600 flex items-center gap-2 text-slate-300 transition">
+                            <i class="fa-brands fa-github text-base text-white"></i> GitHub
+                        </a>
+                        <a id="socYoutube" href="https://youtube.com" target="_blank" class="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-red-500/50 flex items-center gap-2 text-slate-300 transition">
+                            <i class="fa-brands fa-youtube text-base text-red-500"></i> YouTube
+                        </a>
+                        <a id="socFacebook" href="https://facebook.com" target="_blank" class="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 flex items-center gap-2 text-slate-300 transition">
+                            <i class="fa-brands fa-facebook text-base text-blue-500"></i> Facebook
+                        </a>
+                        <a id="socInstagram" href="https://instagram.com" target="_blank" class="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-pink-500/50 flex items-center gap-2 text-slate-300 transition">
+                            <i class="fa-brands fa-instagram text-base text-pink-500"></i> Instagram
+                        </a>
+                        <a id="socTiktok" href="https://tiktok.com" target="_blank" class="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 flex items-center gap-2 text-slate-300 transition">
+                            <i class="fa-brands fa-tiktok text-base text-cyan-400"></i> TikTok
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Business Inquiry Form -->
+            <div class="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-4 glow-blue">
+                <h3 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-blue-400"></i> Send Business Web Request
+                </h3>
+
+                <form onsubmit="handleInquirySubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Your Name / Business Name</label>
+                        <input type="text" id="clientName" required placeholder="e.g. Zubair Ahmad / Zubair Traders" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500 transition">
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Your Phone / WhatsApp</label>
+                        <input type="text" id="clientPhone" required placeholder="e.g. +92 3334618487" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500 transition">
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Type of Website Needed</label>
+                        <select id="clientWebsiteType" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500 transition">
+                            <option value="E-Commerce Online Shop">E-Commerce Online Shop</option>
+                            <option value="Corporate / Company Website">Corporate / Company Website</option>
+                            <option value="Restaurant / Food Order Site">Restaurant / Food Order Site</option>
+                            <option value="Student / Doctor / Engineer Portfolio">Personal Portfolio</option>
+                            <option value="Single Page Product Landing">Product Landing Page</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Project Details & Ideas</label>
+                        <textarea id="clientDetails" rows="4" required placeholder="Tell me what features you want on your website..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500 transition resize-none"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <button type="submit" onclick="setSubmitTarget('whatsapp')" class="py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-bold text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-base"></i> Send to WhatsApp
+                        </button>
+
+                        <button type="submit" onclick="setSubmitTarget('email')" class="py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-envelope"></i> Send via Email
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Widget Button -->
+    <a id="floatingWhatsapp" href="https://wa.me/923334618487?text=Hello!%20I%20am%20interested%20in%20building%20a%20website." target="_blank" title="Chat on WhatsApp" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center text-2xl shadow-2xl glow-whatsapp transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <footer class="mt-auto border-t border-slate-800/80 py-8 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© <span id="currentYear">2026</span> <span id="footerName">Zubair Ahmad</span> | FUUAST Islamabad BSSE Student.</p>
+            <p>Designed for Custom Business Web Development Services</p>
+        </div>
+    </footer>
+
+    <div id="configModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full p-6 rounded-3xl border border-slate-700 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-blue-400 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> Edit Your Details Live
+                </h3>
+                <button onclick="toggleConfigModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="text-slate-400 block mb-1">Your Full Name</label>
+                    <input id="inputName" type="text" value="Zubair Ahmad" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-slate-200">
+                </div>
+
+                <div>
+                    <label class="text-slate-400 block mb-1">University & Program</label>
+                    <input id="inputUniversity" type="text" value="FUUAST Islamabad (BSSE)" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-slate-200">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-400 block mb-1">Mobile Call Number</label>
+                        <input id="inputMobile" type="text" value="+92 3334618487" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-slate-200">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">WhatsApp Number (No Spaces)</label>
+                        <input id="inputWhatsapp" type="text" value="923334618487" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-slate-200">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-slate-400 block mb-1">Email Address</label>
+                    <input id="inputEmail" type="email" value="zubairahmad6410@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-slate-200">
+                </div>
+
+                <div>
+                    <label class="text-slate-400 block mb-1">City / Address</label>
+                    <input id="inputAddress" type="text" value="Islamabad / Rawalpindi, Pakistan" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-slate-200">
+                </div>
+
+                <div class="pt-2 border-t border-slate-800 space-y-2">
+                    <span class="text-xs font-bold text-emerald-400 block">Social Links</span>
+                    <input id="inputGithub" type="url" value="https://github.com" placeholder="GitHub URL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-200">
+                    <input id="inputYoutube" type="url" value="https://youtube.com" placeholder="YouTube URL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-200">
+                    <input id="inputFacebook" type="url" value="https://facebook.com" placeholder="Facebook URL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-200">
+                    <input id="inputInstagram" type="url" value="https://instagram.com" placeholder="Instagram URL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-200">
+                    <input id="inputTiktok" type="url" value="https://tiktok.com" placeholder="TikTok URL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-200">
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                <button onclick="toggleConfigModal()" class="px-4 py-2 text-xs text-slate-400 hover:text-white">Cancel</button>
+                <button onclick="saveDetails()" class="px-5 py-2 text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-xl shadow transition">Save Details Live</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Project Preview Modal -->
+    <div id="previewModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full p-6 rounded-3xl border border-slate-700 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 id="modalTitle" class="text-base font-bold text-emerald-400">Project Title</h3>
+                <button onclick="closePreviewModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="h-48 rounded-xl overflow-hidden bg-slate-900">
+                <img id="modalImg" src="" alt="Preview" class="w-full h-full object-cover">
+            </div>
+
+            <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed"></p>
+
+            <div class="flex justify-end pt-2 border-t border-slate-800">
+                <button onclick="closePreviewModal()" class="px-5 py-2 text-xs font-semibold bg-slate-800 text-slate-300 rounded-xl">Close Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let submitTarget = 'whatsapp';
+
+        // Animated Typing Loop
+        const phrases = ["E-Commerce Stores", "Shop Websites", "Corporate Portals", "Custom Portfolios"];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function typeLoop() {
+            const current = phrases[phraseIdx];
+            const target = document.getElementById("typingText");
+            if (!target) return;
+
+            if (isDeleting) {
+                target.innerText = current.substring(0, charIdx--);
+            } else {
+                target.innerText = current.substring(0, charIdx++);
+            }
+
+            if (!isDeleting && charIdx === current.length + 1) {
+                isDeleting = true;
+                setTimeout(typeLoop, 1500);
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                setTimeout(typeLoop, 500);
+            } else {
+                setTimeout(typeLoop, isDeleting ? 40 : 90);
+            }
+        }
+
+        // Apply Custom Info dynamically across DOM
+        function saveDetails() {
+            const name = document.getElementById("inputName").value || "Ali Raza";
+            const uni = document.getElementById("inputUniversity").value || "FUUAST Islamabad (BSSE)";
+            const mobile = document.getElementById("inputMobile").value || "+92 300 1234567";
+            let rawWhatsapp = document.getElementById("inputWhatsapp").value.replace(/[^0-9]/g, '') || "923001234567";
+            const email = document.getElementById("inputEmail").value || "student@fuuast.edu.pk";
+            const address = document.getElementById("inputAddress").value || "Islamabad / Rawalpindi";
+
+            const github = document.getElementById("inputGithub").value || "https://github.com";
+            const youtube = document.getElementById("inputYoutube").value || "https://youtube.com";
+            const facebook = document.getElementById("inputFacebook").value || "https://facebook.com";
+            const instagram = document.getElementById("inputInstagram").value || "https://instagram.com";
+            const tiktok = document.getElementById("inputTiktok").value || "https://tiktok.com";
+
+            // Update Name Elements
+            document.getElementById("navName").innerText = name;
+            document.getElementById("cardName").innerText = name;
+            document.getElementById("footerName").innerText = name;
+            document.getElementById("logoInitial").innerText = name.charAt(0).toUpperCase();
+
+            // Update University Elements
+            document.getElementById("navUniversity").innerText = uni;
+            document.getElementById("heroBadgeUni").innerText = uni;
+            document.getElementById("cardUniversity").innerText = uni;
+
+            // Update Phone & WhatsApp
+            document.getElementById("cardMobile").innerText = mobile;
+            document.getElementById("contactMobileText").innerText = mobile;
+            document.getElementById("cardWhatsapp").innerText = "+" + rawWhatsapp;
+            document.getElementById("contactWhatsappText").innerText = "+" + rawWhatsapp;
+
+            // Update Links for WhatsApp
+            const waMsg = encodeURIComponent("Hello! I want to order a website for my business.");
+            const waUrl = `https://wa.me/${rawWhatsapp}?text=${waMsg}`;
+            document.getElementById("navWhatsappBtn").href = waUrl;
+            document.getElementById("heroWhatsappCta").href = waUrl;
+            document.getElementById("contactWhatsappCard").href = waUrl;
+            document.getElementById("floatingWhatsapp").href = waUrl;
+
+            // Update Email & Location
+            document.getElementById("contactEmailLink").innerText = email;
+            document.getElementById("contactEmailLink").href = `mailto:${email}`;
+            document.getElementById("cardAddress").innerText = address;
+            document.getElementById("contactLocationText").innerText = address;
+
+            // Update Social Media Links
+            document.getElementById("linkGithub").href = github;
+            document.getElementById("socGithub").href = github;
+
+            document.getElementById("linkYoutube").href = youtube;
+            document.getElementById("socYoutube").href = youtube;
+
+            document.getElementById("linkFacebook").href = facebook;
+            document.getElementById("socFacebook").href = facebook;
+
+            document.getElementById("linkInstagram").href = instagram;
+            document.getElementById("socInstagram").href = instagram;
+
+            document.getElementById("linkTiktok").href = tiktok;
+            document.getElementById("socTiktok").href = tiktok;
+
+            toggleConfigModal();
+        }
+
+        // Toggle Modals
+        function toggleConfigModal() {
+            document.getElementById("configModal").classList.toggle("hidden");
+        }
+
+        function toggleMobileNav() {
+            document.getElementById("mobileNav").classList.toggle("hidden");
+        }
+
+        function openPreviewModal(title, desc, imgUrl) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDesc").innerText = desc;
+            document.getElementById("modalImg").src = imgUrl;
+            document.getElementById("previewModal").classList.remove("hidden");
+        }
+
+        function closePreviewModal() {
+            document.getElementById("previewModal").classList.add("hidden");
+        }
+
+        // Filter Portfolio Projects
+        function filterProjects(cat) {
+            const cards = document.querySelectorAll('.project-card');
+            const tabs = document.querySelectorAll('.project-tab');
+
+            tabs.forEach(t => {
+                t.classList.remove('active', 'text-blue-400', 'bg-slate-800');
+                t.classList.add('text-slate-400');
+            });
+
+            event.target.classList.add('active', 'text-blue-400', 'bg-slate-800');
+            event.target.classList.remove('text-slate-400');
+
+            cards.forEach(c => {
+                if (cat === 'all' || c.classList.contains(cat)) {
+                    c.classList.remove('hidden');
+                } else {
+                    c.classList.add('hidden');
+                }
+            });
+        }
+
+        function setSubmitTarget(target) {
+            submitTarget = target;
+        }
+
+        // Handle Form Submissions to WhatsApp or Email
+        function handleInquirySubmit(event) {
+            event.preventDefault();
+            const clientName = document.getElementById("clientName").value;
+            const clientPhone = document.getElementById("clientPhone").value;
+            const webType = document.getElementById("clientWebsiteType").value;
+            const details = document.getElementById("clientDetails").value;
+
+            const myWhatsappNumber = document.getElementById("inputWhatsapp").value.replace(/[^0-9]/g, '') || "923001234567";
+            const myEmail = document.getElementById("inputEmail").value || "student@fuuast.edu.pk";
+
+            if (submitTarget === 'whatsapp') {
+                const message = `*New Website Order Inquiry*%0A%0A*Client Name:* ${clientName}%0A*Client Contact:* ${clientPhone}%0A*Website Type:* ${webType}%0A*Details:* ${details}`;
+                window.open(`https://wa.me/${myWhatsappNumber}?text=${message}`, '_blank');
+            } else {
+                const subject = encodeURIComponent(`Website Order: ${webType} from ${clientName}`);
+                const body = encodeURIComponent(`Client Name: ${clientName}\nClient Phone: ${clientPhone}\nWebsite Type: ${webType}\n\nProject Requirements:\n${details}`);
+                window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
+            }
+        }
+
+        // Initialize App
+        window.onload = function() {
+            typeLoop();
+        };
+    </script>
+</body>
+</html>
